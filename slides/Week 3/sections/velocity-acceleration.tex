@@ -58,9 +58,9 @@
     For a tyre with a constant coefficient of friction $\mu$, the maximum grip available is:
     $$F_f = \mu N = \mu \left(mg + \frac{1}{2} \rho C_L A v^2\right)$$
     Therefore, the \textbf{traction-limited} acceleration is:
-    $$a_x = \frac{F_f}{m}
-    = \frac{\mu}{m} \left(mg + \frac{1}{2} \rho C_L A v^2\right)
-    = \mu g + \frac{\mu \rho C_L A}{2m} v^2$$
+    $$a_x = \frac{F_f - F_D}{m}
+    = \frac{\mu}{m} \left(mg + \frac{1}{2} \rho C_L A v^2\right) - \frac{\rho C_D A v^2}{2m}
+    = \mu g + \frac{\rho A(\mu C_L - C_D)}{2m} v^2$$
     Real tyres are \textbf{load sensitive},
     meaning that $\mu$ decreases as $N$ increases.
     This means that adding more downforce has diminishing returns.
@@ -73,10 +73,32 @@
     (try searching for \textit{`Emrax 228 datasheet'}). \\~\\
     This is divided by the final drive ratio
     to find the rotational velocity of the wheels,
-    and multiplied by the tyre radius to find the linear velocity of the car.
+    and multiplied by the tyre radius to find the
+    \textbf{velocity limit} of the car.
     $$v_\text{max} = \frac{\omega_\text{max} R_0}{\text{FDR}}$$
 \end{frame}
 
 \begin{frame}
     Lets plot these three lines on the velocity-acceleration diagram:
+    \begin{figure}
+        \includegraphics[width=\textwidth]{res/velocity-acceleration graph.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    What does this graph tell us?
+    \begin{itemize}
+        \item At low velocities, acceleration is limited by traction
+        \item The traction limit is governed by downforce and tyre grip
+        \item At high velocities, acceleration is limited by power
+        \item The power limit is governed by drag and motor power
+    \end{itemize}
+    You can open the graph in Desmos
+    \href{https://www.desmos.com/calculator/vfyipxhjrg}{(\textit{link})}
+    and move the vehicle parameter sliders
+    to see how they affect the limits.
+    \begin{block}{Try it yourself}
+        This graph shows forward acceleration.
+        What would the graph for braking look like?
+    \end{block}
 \end{frame}
