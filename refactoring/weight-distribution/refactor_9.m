@@ -10,22 +10,18 @@ totalMass = 300;
 partMass = [1, 2, 5, 10, 20];
 deltaPosition = -100:100;
 
-fig = figure(WindowState = "maximized");
-ax = axes(fig);
+
+ax = axes();
 hold(ax, "on");
 
 for i = 1:length(partMass)
-
-    deltaFWD = calculateFWDDelta( ...
-        totalMass = totalMass, ...
-        partMass = partMass(i), ...
-        deltaPosition = deltaPosition);
-        
+    deltaCOM = calculateCOMDelta(totalMass, partMass(i), deltaPosition);
+    deltaFWD = calculateFWDDelta(deltaCOM);
     plot(ax, deltaPosition, deltaFWD * 100, "-")
-
 end
 
 title(ax, "Part Position vs Front Weight Distribution")
+subtitle(ax, sprintf("Total mass = %.0f kg", totalMass))
 xlabel(ax, "Change in Part Position")
 xtickformat(ax, "%.0f mm")
 ylabel(ax, "Change in Front Weight Distribution")
@@ -36,17 +32,25 @@ leg = legend(ax, compose("%.0f kg", partMass));
 title(leg, "Part Mass")
 
 
-    
-function deltaFWD = calculateFWDDelta(options)
-        
-    arguments
-        options.totalMass (1,1) double {mustBePositive, mustBeFinite}
-        options.partMass (1,1) double {mustBePositive, mustBeFinite}
-        options.wheelbase (1,1) double {mustBePositive, mustBeFinite} = 1535
-        options.deltaPosition double {mustBeFinite} = -200:200
+function deltaCOM = calculateCOMDelta(totalMass, partMass, deltaPosition)
+
+    arguments (Input)
+        totalMass (1,1) double {mustBePositive, mustBeFinite}
+        partMass (1,1) double {mustBePositive, mustBeFinite}
+        deltaPosition double {mustBeFinite} = -200:200
     end
     
-    deltaFWD = - (options.partMass / options.totalMass) ...
-        * (options.deltaPosition / options.wheelbase);
+    deltaCOM = (partMass / totalMass) * deltaPosition;
+
+end
+
+function deltaFWD = calculateFWDDelta(deltaCOM, wheelbase)
+
+    arguments (Input)
+        deltaCOM double {mustBeFinite}
+        wheelbase (1,1) double {mustBePositive, mustBeFinite} = 1535
+    end
+
+    deltaFWD = - deltaCOM / wheelbase;
 
 end

@@ -12,15 +12,16 @@ wheelbase = 1535;
 partMass = 150;
 deltaPosition = -100:100;
 
-deltaFWD = calculateFWDDelta(totalMass, partMass, wheelbase, deltaPosition);
+deltaCOM = calculateCOMDelta(totalMass, partMass, deltaPosition);
+deltaFWD = calculateFWDDelta(deltaCOM, wheelbase);
 
 plot(deltaPosition, deltaFWD, "-")
 
 
-    
-function deltaFWD = calculateFWDDelta( ...
-        totalMass, partMass, wheelbase, deltaPosition)
-        
-    deltaFWD = - (partMass / totalMass) * (deltaPosition / wheelbase);
+function deltaCOM = calculateCOMDelta(totalMass, partMass, deltaPosition)
+    deltaCOM = (partMass / totalMass) * deltaPosition;
+end
 
+function deltaFWD = calculateFWDDelta(deltaCOM, wheelbase)
+    deltaFWD = - deltaCOM / wheelbase;
 end

@@ -13,6 +13,7 @@ wheelbase = 1535;
 partMass = 150;
 deltaPosition = -100:100;
 
-deltaFWD = - (partMass / totalMass) * (deltaPosition / wheelbase);
+deltaCOM = (partMass / totalMass) * deltaPosition;
+deltaFWD = - deltaCOM / wheelbase;
 
 plot(deltaPosition, deltaFWD, "-")

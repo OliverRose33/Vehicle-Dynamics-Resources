@@ -10,15 +10,14 @@
 % allowing the function to be called multiple times
 % without overwriting the existing graph.
 
+totalMass = 600;
+partMass = 150;
 deltaPosition = -100:100;
 
-deltaFWD = calculateFWDDelta( ...
-    totalMass = 600, ...
-    partMass = 150, ...
-    deltaPosition = deltaPosition);
+deltaCOM = calculateCOMDelta(totalMass, partMass, deltaPosition);
+deltaFWD = calculateFWDDelta(deltaCOM);
 
-fig = figure(WindowState = "maximized");
-ax = axes(fig);
+ax = axes();
 
 plot(ax, deltaPosition, deltaFWD * 100, "-")
 title(ax, "Part Position vs Front Weight Distribution")
@@ -29,17 +28,25 @@ ytickformat(ax, "%.2f%%")
 grid(ax, "on")
 
 
-    
-function deltaFWD = calculateFWDDelta(options)
-        
-    arguments
-        options.totalMass (1,1) double {mustBePositive, mustBeFinite}
-        options.partMass (1,1) double {mustBePositive, mustBeFinite}
-        options.wheelbase (1,1) double {mustBePositive, mustBeFinite} = 1535
-        options.deltaPosition double {mustBeFinite} = -200:200
+function deltaCOM = calculateCOMDelta(totalMass, partMass, deltaPosition)
+
+    arguments (Input)
+        totalMass (1,1) double {mustBePositive, mustBeFinite}
+        partMass (1,1) double {mustBePositive, mustBeFinite}
+        deltaPosition double {mustBeFinite} = -200:200
     end
     
-    deltaFWD = - (options.partMass / options.totalMass) ...
-        * (options.deltaPosition / options.wheelbase);
+    deltaCOM = (partMass / totalMass) * deltaPosition;
+
+end
+
+function deltaFWD = calculateFWDDelta(deltaCOM, wheelbase)
+
+    arguments (Input)
+        deltaCOM double {mustBeFinite}
+        wheelbase (1,1) double {mustBePositive, mustBeFinite} = 1535
+    end
+
+    deltaFWD = - deltaCOM / wheelbase;
 
 end
