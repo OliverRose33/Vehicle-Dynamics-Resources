@@ -1,0 +1,39 @@
+\documentclass{beamer}
+\usetheme[numbering=fullbar,totalframenumbering=no]{focus}
+\hypersetup{pdfpagemode=FullScreen}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\definecolor{main}{HTML}{003366}
+\definecolor{background}{HTML}{FFFFFF}
+
+
+\title{Vehicle Dynamics}
+\subtitle{Week 6 - Laptime Simulation}
+\author{Oliver Rose}
+\institute{University of Strathclyde Motorsport}
+\date{28/10/2025}
+\footlineinfo{University of Strathclyde Motorsport}
+
+\begin{document}
+
+\begin{frame}
+    \maketitle
+\end{frame}
+
+
+\include{sections/introduction}
+\include{sections/vehicle-models}
+\include{sections/quasi-steady-state}
+\include{sections/validation}
+
+\begin{frame}[focus]
+    \begin{figure}
+        \includegraphics[width=0.33\textwidth]{../../res/usm-logo.png}
+    \end{figure}
+\end{frame}
+
+\end{document}
