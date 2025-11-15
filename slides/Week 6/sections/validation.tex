@@ -1,0 +1,41 @@
+\section*{Validation}
+
+\begin{frame}{Validation}
+    Without validating our simulation,
+    we must be careful what conclusions we draw from it.
+    \\~\\
+    We can observe \textbf{trends}
+    (e.g.\ laptime decreases as mass decreases). \\
+    We cannot use exact \textbf{numerical} values
+    (e.g.\ decreasing mass by 1kg decreases laptime by 0.1s).
+    \\~\\
+    \textbf{How can we validate our simulation?}
+    \begin{itemize}
+        \item Compare to real test data from the car.
+        This requires testing time and data acquisition.
+        \item Compare to test data from other sources.
+        Not as strong as using data from our car.
+        However, this can be used to show that the lapsim functions correctly.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Correlation}
+    What can we do if our model doesn't match experimental data?
+    \\~\\
+    The most important thing is to understand \textbf{why}.
+    Compare various testing data channels to simulation data channels
+    to diagnose where the problem is occuring.
+    \\~\\
+    How do we bring our model in line with the data?
+    \begin{itemize}
+        \item Fix any errors in the model
+        \item Use a more complicated physics model
+        \item Add \textbf{correlation coefficients}
+    \end{itemize}
+    If correlation coefficients are used,
+    they should be as simple as possible,
+    and their use should be fully justified
+    (e.g.\ scaling coefficient applied to tyre grip
+    to account for tyre degradation).
+\end{frame}
